@@ -99,7 +99,7 @@ public class LinesDrawer : MonoBehaviour {
                 currentLine.UsePhysics ( false );
                 StartCoroutine(Spawn3DMesh());
 
-
+                Destroy(currentLine.gameObject);
                 currentLine = null;
             }
         }
@@ -111,19 +111,18 @@ public class LinesDrawer : MonoBehaviour {
     {
         points = currentLine.points;
         _ropeBuilder.ChangeSegmentCount(points.Count);
+        var startPoint = points[0];
         yield return new WaitForSeconds(.1f);
         Initialize();
         Debug.Log($"Point Count : {points.Count}");
+        Debug.Log($"Start : {startPoint}");
         for (int i = 0; i < points.Count; i++)
         {
+            points[i] -= startPoint;
             
-            // points[i] -= _startPoint;
-            // points[i].z = 0;
-            // if(i > points.Count-3)
-            //     nodes[i].gameObject.SetActive(false);
-            // else
-            nodes[i].position = points[i];
+            nodes[i].localPosition = points[i];
         }
+        Debug.Log($"Start new: {nodes[0].localPosition}");
         // if(nodes.Count>points.Count)
         //     for (int n = points.Count; n < nodes.Count ; n++)
         //     {
