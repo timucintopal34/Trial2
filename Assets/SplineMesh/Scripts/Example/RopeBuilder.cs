@@ -31,6 +31,12 @@ namespace SplineMesh {
         public int segmentCount;
         public float segmentSpacing;
 
+        public void ChangeSegmentCount(int count)
+        {
+            segmentCount = count;
+            toUpdate = true;
+        }
+
         private void OnEnable() {
             spline = GetComponent<Spline>();
             toUpdate = true;

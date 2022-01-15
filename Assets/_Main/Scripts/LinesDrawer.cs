@@ -1,3 +1,7 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using SplineMesh;
 using UnityEngine;
 
 public class LinesDrawer : MonoBehaviour {
@@ -10,11 +14,32 @@ public class LinesDrawer : MonoBehaviour {
     public Gradient lineColor;
     public float linePointsMinDistance;
     public float lineWidth;
-
+    
     Line currentLine;
 
     public Camera cam;
+
+    private List<Vector2> points = new List<Vector2>();
+    private RopeBuilder _ropeBuilder;
     
+    public List<Transform> nodes = new List<Transform>();
+
+    private void Awake()
+    {
+        _ropeBuilder = FindObjectOfType<RopeBuilder>();
+    }
+    
+    private void Initialize()
+    {
+        nodes.Clear();
+        var parent = FindObjectOfType<Spline>().transform.GetChild(1);
+        foreach (Transform child in parent)
+        {
+            // Debug.Log($"Name Child : {child.name}");
+            nodes.Add(child);
+        }
+        Debug.Log($"Nodes amount {nodes.Count}");
+    }
 
     void Start ( ) {
         // cam = Camera.main;
@@ -47,7 +72,6 @@ public class LinesDrawer : MonoBehaviour {
     // Draw ----------------------------------------------------
     void Draw ( ) {
         Vector2 mousePosition = cam.ScreenToWorldPoint ( Input.mousePosition );
-        Debug.Log($"Draw : {mousePosition}");
         //Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
         // RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer );
 
@@ -58,7 +82,6 @@ public class LinesDrawer : MonoBehaviour {
         // }
         // else
         // {
-            Debug.Log("Add Point");
             currentLine.AddPoint(mousePosition);
         // }
     }
@@ -74,11 +97,37 @@ public class LinesDrawer : MonoBehaviour {
 
                 //Activate Physics on the line
                 currentLine.UsePhysics ( false );
-                Debug.Log($"Point Count : {currentLine.pointsCount}");
+                StartCoroutine(Spawn3DMesh());
+
+
                 currentLine = null;
             }
         }
         
         
+    }
+    
+    IEnumerator Spawn3DMesh()
+    {
+        points = currentLine.points;
+        _ropeBuilder.ChangeSegmentCount(points.Count);
+        yield return new WaitForSeconds(.1f);
+        Initialize();
+        Debug.Log($"Point Count : {points.Count}");
+        for (int i = 0; i < points.Count; i++)
+        {
+            
+            // points[i] -= _startPoint;
+            // points[i].z = 0;
+            // if(i > points.Count-3)
+            //     nodes[i].gameObject.SetActive(false);
+            // else
+            nodes[i].position = points[i];
+        }
+        // if(nodes.Count>points.Count)
+        //     for (int n = points.Count; n < nodes.Count ; n++)
+        //     {
+        //         nodes[n].gameObject.SetActive(false);
+        //     }
     }
 }

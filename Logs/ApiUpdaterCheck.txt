@@ -8,3 +8,83 @@ C# parse time         : 610ms
 candidates check time : 219ms
 console write time    : 2ms
 
+[api-updater (non-obsolete-error-filter)] 1/15/2022 6:23:27 PM : Starting /Users/timucintopal/Documents/GitHub/2020.3.16f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 422.023ms
+moved types parse time: 132ms
+candidates parse time : 6ms
+C# parse time         : 503ms
+candidates check time : 290ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 1/15/2022 6:23:57 PM : Starting /Users/timucintopal/Documents/GitHub/2020.3.16f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 254.02ms
+moved types parse time: 148ms
+candidates parse time : 6ms
+C# parse time         : 587ms
+candidates check time : 294ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 1/15/2022 6:24:39 PM : Starting /Users/timucintopal/Documents/GitHub/2020.3.16f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 390.768ms
+moved types parse time: 166ms
+candidates parse time : 18ms
+C# parse time         : 569ms
+candidates check time : 331ms
+console write time    : 2ms
+
+[api-updater (non-obsolete-error-filter)] 1/15/2022 6:25:33 PM : Starting /Users/timucintopal/Documents/GitHub/2020.3.16f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 266.937ms
+moved types parse time: 134ms
+candidates parse time : 6ms
+C# parse time         : 578ms
+candidates check time : 292ms
+console write time    : 2ms
+
+[api-updater (non-obsolete-error-filter)] 1/15/2022 6:26:13 PM : Starting /Users/timucintopal/Documents/GitHub/2020.3.16f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 184.657ms
+moved types parse time: 147ms
+candidates parse time : 6ms
+C# parse time         : 562ms
+candidates check time : 348ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 1/15/2022 6:28:25 PM : Starting /Users/timucintopal/Documents/GitHub/2020.3.16f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 202.552ms
+moved types parse time: 125ms
+candidates parse time : 5ms
+C# parse time         : 510ms
+candidates check time : 140ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 1/15/2022 6:28:41 PM : Starting /Users/timucintopal/Documents/GitHub/2020.3.16f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 232.893ms
+moved types parse time: 137ms
+candidates parse time : 5ms
+C# parse time         : 529ms
+candidates check time : 154ms
+console write time    : 1ms
+
+[api-updater (non-obsolete-error-filter)] 1/15/2022 6:32:36 PM : Starting /Users/timucintopal/Documents/GitHub/2020.3.16f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 258.416ms
+moved types parse time: 136ms
+candidates parse time : 5ms
+C# parse time         : 527ms
+candidates check time : 113ms
+console write time    : 1ms
+
