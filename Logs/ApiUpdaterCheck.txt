@@ -1,0 +1,10 @@
+[api-updater (non-obsolete-error-filter)] 1/15/2022 3:02:39 PM : Starting /Users/timucintopal/Documents/GitHub/2020.3.16f1/Unity.app/Contents/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 224.025ms
+moved types parse time: 145ms
+candidates parse time : 6ms
+C# parse time         : 610ms
+candidates check time : 219ms
+console write time    : 2ms
+
