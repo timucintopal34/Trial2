@@ -13,17 +13,17 @@ public class LinesDrawer : MonoBehaviour {
 
     Line currentLine;
 
-    Camera cam;
-
+    public Camera cam;
+    
 
     void Start ( ) {
-        cam = Camera.main;
+        // cam = Camera.main;
         cantDrawOverLayerIndex = LayerMask.NameToLayer ( "CantDrawOver" );
     }
 
     void Update ( ) {
         if ( Input.GetMouseButtonDown ( 0 ) )
-            BeginDraw ( );
+            BeginDraw();
 
         if ( currentLine != null )
             Draw ( );
@@ -35,8 +35,9 @@ public class LinesDrawer : MonoBehaviour {
     // Begin Draw ----------------------------------------------
     void BeginDraw ( ) {
         currentLine = Instantiate ( linePrefab, this.transform ).GetComponent <Line> ( );
-
+        
         //Set line properties
+        // currentLine.transform.localPosition = cam.ScreenToWorldPoint(Input.mousePosition);
         currentLine.UsePhysics ( false );
         currentLine.SetLineColor ( lineColor );
         currentLine.SetPointsMinDistance ( linePointsMinDistance );
@@ -48,18 +49,18 @@ public class LinesDrawer : MonoBehaviour {
         Vector2 mousePosition = cam.ScreenToWorldPoint ( Input.mousePosition );
         Debug.Log($"Draw : {mousePosition}");
         //Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
-        RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer );
+        // RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer );
 
-        if ( hit )
-        {
-            Debug.Log("End Draw");
-            EndDraw();
-        }
-        else
-        {
+        // if ( hit )
+        // {
+        //     Debug.Log("End Draw");
+        //     EndDraw();
+        // }
+        // else
+        // {
             Debug.Log("Add Point");
             currentLine.AddPoint(mousePosition);
-        }
+        // }
     }
     // End Draw ------------------------------------------------
     void EndDraw ( ) {
@@ -69,15 +70,15 @@ public class LinesDrawer : MonoBehaviour {
                 Destroy ( currentLine.gameObject );
             } else {
                 //Add the line to "CantDrawOver" layer
-                currentLine.gameObject.layer = cantDrawOverLayerIndex;
+                // currentLine.gameObject.layer = cantDrawOverLayerIndex;
 
                 //Activate Physics on the line
                 currentLine.UsePhysics ( false );
-
+                Debug.Log($"Point Count : {currentLine.pointsCount}");
                 currentLine = null;
             }
         }
         
-        Debug.Log($"Point Count : {currentLine.pointsCount}");
+        
     }
 }
