@@ -13,10 +13,12 @@ public class MeshController : MonoBehaviour
 
     public void ColliderOn()
     {
-        
-        var cols = transform.GetComponentsInChildren<Collider>().ToList();
+        var cols = transform.GetComponentsInChildren<MeshCollider>().ToList();
         Debug.Log($"Mesh Colliders {cols.Count}");
         foreach (var col in cols)
+        {
             col.enabled = true;
+            col.convex = true;
+        }
     }
 }

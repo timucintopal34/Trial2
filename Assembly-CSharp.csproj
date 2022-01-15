@@ -80,6 +80,8 @@
      <Compile Include="Assets\MeshController.cs" />
      <Compile Include="Assets\_Main\Scripts\Line.cs" />
      <Compile Include="Assets\_Main\Scripts\LinesDrawer.cs" />
+     <Compile Include="Assets\CarController.cs" />
+     <Compile Include="Assets\TireCollisionCheck.cs" />
      <None Include="Assets\SplineMesh\Doc.txt" />
  <Reference Include="UnityEngine">
  <HintPath>/Users/timucintopal/Documents/GitHub/2020.3.16f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -695,6 +697,12 @@
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Users/timucintopal/Documents/Export/Trial/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="com.unity.cinemachine.editor">
+ <HintPath>/Users/timucintopal/Documents/Export/Trial/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Cinemachine">
+ <HintPath>/Users/timucintopal/Documents/Export/Trial/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

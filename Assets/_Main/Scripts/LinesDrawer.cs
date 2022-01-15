@@ -20,13 +20,24 @@ public class LinesDrawer : MonoBehaviour {
     public Camera cam;
 
     private List<Vector2> points = new List<Vector2>();
-    private RopeBuilder _ropeBuilder;
-    
     public List<Transform> nodes = new List<Transform>();
+    
+    private RopeBuilder _ropeBuilder;
+
+    private MeshController _meshController;
+    private Rigidbody rb;
+
+    private CarController _carController;
+
+    public Transform rearTire;
+    public Transform frontTire;
 
     private void Awake()
     {
         _ropeBuilder = FindObjectOfType<RopeBuilder>();
+        _meshController = FindObjectOfType<MeshController>();
+        rb = _meshController.GetComponent<Rigidbody>();
+        _carController = FindObjectOfType<CarController>();
     }
     
     private void Initialize()
@@ -48,7 +59,10 @@ public class LinesDrawer : MonoBehaviour {
 
     void Update ( ) {
         if ( Input.GetMouseButtonDown ( 0 ) )
+        {
             BeginDraw();
+            
+        }
 
         if ( currentLine != null )
             Draw ( );
@@ -109,24 +123,49 @@ public class LinesDrawer : MonoBehaviour {
     
     IEnumerator Spawn3DMesh()
     {
+        rearTire.SetParent(null);
+        frontTire.SetParent(null);
         points = currentLine.points;
+        // yield return new WaitForEndOfFrame();
         _ropeBuilder.ChangeSegmentCount(points.Count);
         var startPoint = points[0];
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(.01f);
+        // yield return new WaitForEndOfFrame();
         Initialize();
         Debug.Log($"Point Count : {points.Count}");
         Debug.Log($"Start : {startPoint}");
+        _meshController.ColliderOn();
+        
         for (int i = 0; i < points.Count; i++)
         {
             points[i] -= startPoint;
-            
-            nodes[i].localPosition = points[i];
+
+            nodes[i].localPosition = new Vector2(points[i].x, points[i].y );
+
         }
-        Debug.Log($"Start new: {nodes[0].localPosition}");
-        // if(nodes.Count>points.Count)
-        //     for (int n = points.Count; n < nodes.Count ; n++)
-        //     {
-        //         nodes[n].gameObject.SetActive(false);
-        //     }
+
+        _meshController.transform.position = new Vector3(_meshController.transform.position.x,
+            _meshController.transform.position.y + 2, 0);
+
+        // Debug.Log($"Start new: {nodes[0].localPosition}");
+        if (!rb.useGravity)
+        {
+            _carController.applyForce = true;
+            rb.useGravity = true;
+            rb.isKinematic = false;
+        }
+        
+        if(!rearTire.gameObject.activeSelf)
+            rearTire.gameObject.SetActive(true);
+        if(!frontTire.gameObject.activeSelf)
+            frontTire.gameObject.SetActive(true);
+        rearTire.SetParent(_meshController.transform);
+        frontTire.SetParent(_meshController.transform);
+        
+        rearTire.localPosition = nodes[0].localPosition;
+        frontTire.localPosition = nodes[nodes.Count - 1].localPosition;
+        
+
+
     }
 }
