@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using SplineMesh;
 using UnityEngine;
 
@@ -46,23 +47,18 @@ public class LinesDrawer : MonoBehaviour {
         var parent = FindObjectOfType<Spline>().transform.GetChild(1);
         foreach (Transform child in parent)
         {
-            // Debug.Log($"Name Child : {child.name}");
             nodes.Add(child);
         }
-        Debug.Log($"Nodes amount {nodes.Count}");
+        // Debug.Log($"Nodes amount {nodes.Count}");
     }
 
     void Start ( ) {
-        // cam = Camera.main;
         cantDrawOverLayerIndex = LayerMask.NameToLayer ( "CantDrawOver" );
     }
 
     void Update ( ) {
         if ( Input.GetMouseButtonDown ( 0 ) )
-        {
             BeginDraw();
-            
-        }
 
         if ( currentLine != null )
             Draw ( );
@@ -74,7 +70,7 @@ public class LinesDrawer : MonoBehaviour {
     // Begin Draw ----------------------------------------------
     void BeginDraw ( ) {
         currentLine = Instantiate ( linePrefab, this.transform ).GetComponent <Line> ( );
-        
+        Time.timeScale = .5f;
         //Set line properties
         // currentLine.transform.localPosition = cam.ScreenToWorldPoint(Input.mousePosition);
         currentLine.UsePhysics ( false );
@@ -88,7 +84,7 @@ public class LinesDrawer : MonoBehaviour {
         Vector2 mousePosition = cam.ScreenToWorldPoint ( Input.mousePosition );
         //Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
         // RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer );
-
+        
         // if ( hit )
         // {
         //     Debug.Log("End Draw");
@@ -96,23 +92,19 @@ public class LinesDrawer : MonoBehaviour {
         // }
         // else
         // {
-            currentLine.AddPoint(mousePosition);
+        currentLine.AddPoint(mousePosition);
         // }
     }
     // End Draw ------------------------------------------------
     void EndDraw ( ) {
+        Time.timeScale = 1;
         if ( currentLine != null ) {
             if ( currentLine.pointsCount < 2 ) {
                 //If line has one point
                 Destroy ( currentLine.gameObject );
             } else {
-                //Add the line to "CantDrawOver" layer
-                // currentLine.gameObject.layer = cantDrawOverLayerIndex;
 
-                //Activate Physics on the line
-                currentLine.UsePhysics ( false );
                 StartCoroutine(Spawn3DMesh());
-
                 Destroy(currentLine.gameObject);
                 currentLine = null;
             }
@@ -123,17 +115,21 @@ public class LinesDrawer : MonoBehaviour {
     
     IEnumerator Spawn3DMesh()
     {
+        
+        _meshController.MeshOff();
         rearTire.SetParent(null);
         frontTire.SetParent(null);
         points = currentLine.points;
+        
+        _meshController.transform.localEulerAngles = Vector3.zero;
         // yield return new WaitForEndOfFrame();
         _ropeBuilder.ChangeSegmentCount(points.Count);
         var startPoint = points[0];
         yield return new WaitForSeconds(.01f);
         // yield return new WaitForEndOfFrame();
         Initialize();
-        Debug.Log($"Point Count : {points.Count}");
-        Debug.Log($"Start : {startPoint}");
+        // Debug.Log($"Point Count : {points.Count}");
+        // Debug.Log($"Start : {startPoint}");
         _meshController.ColliderOn();
         
         for (int i = 0; i < points.Count; i++)
@@ -155,15 +151,19 @@ public class LinesDrawer : MonoBehaviour {
             rb.isKinematic = false;
         }
         
-        if(!rearTire.gameObject.activeSelf)
-            rearTire.gameObject.SetActive(true);
-        if(!frontTire.gameObject.activeSelf)
-            frontTire.gameObject.SetActive(true);
+        // if(!rearTire.gameObject.activeSelf)
+        //     rearTire.gameObject.SetActive(true);
+        // if(!frontTire.gameObject.activeSelf)
+        //     frontTire.gameObject.SetActive(true);
         rearTire.SetParent(_meshController.transform);
         frontTire.SetParent(_meshController.transform);
         
         rearTire.localPosition = nodes[0].localPosition;
         frontTire.localPosition = nodes[nodes.Count - 1].localPosition;
+        
+        yield return new WaitForSeconds(.01f);
+        
+        _meshController.MeshOn();
         
 
 

@@ -6,6 +6,7 @@ using UnityEngine;
 public class TireCollisionCheck : MonoBehaviour
 {
     public bool isTriggered = false;
+    public float forceAmount = 5;
     private Rigidbody _rigidbody;
 
     private void Awake()
@@ -18,7 +19,7 @@ public class TireCollisionCheck : MonoBehaviour
         if (other.gameObject.layer == 7)
         {
             isTriggered = true;
-            _rigidbody.AddForce(Vector3.right * 5 , ForceMode.Force);
+            _rigidbody.AddForce(Vector3.right * forceAmount , ForceMode.Force);
         }
     }
 

@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawArea : MonoBehaviour
+public class DrawArea : Singleton<DrawArea>
 {
     [SerializeField] private Transform upperBound;
     [SerializeField] private Transform lowerBound;
     [SerializeField] private Transform leftBound;
     [SerializeField] private Transform rightBound;
     
-    public Vector3 GetPointOnArea(Vector3 position)
+    public Vector2 GetPointOnArea(Vector3 position)
     {
         if (position.z < leftBound.position.z)
         {
@@ -28,6 +28,6 @@ public class DrawArea : MonoBehaviour
             position.y = upperBound.position.y;
         }
         
-        return position;
+        return new Vector2(position.z, position.y);
     }
 }

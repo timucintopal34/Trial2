@@ -21,22 +21,15 @@ public class Line : MonoBehaviour {
         if ( pointsCount >= 1 && Vector2.Distance ( newPoint, GetLastPoint ( ) ) < pointsMinDistance )
             return;
 
+        // newPoint = DrawArea.Instance.GetPointOnArea(new Vector3(0, newPoint.y, newPoint.x));
+
         points.Add ( newPoint );
         pointsCount++;
-
-        //Add Circle Collider to the Point
-        CircleCollider2D circleCollider = this.gameObject.AddComponent <CircleCollider2D> ( );
-        circleCollider.offset = newPoint;
-        circleCollider.radius = circleColliderRadius;
 
         //Line Renderer
         lineRenderer.positionCount = pointsCount;
         lineRenderer.SetPosition ( pointsCount - 1, newPoint );
 
-        //Edge Collider
-        //Edge colliders accept only 2 points or more (we can't create an edge with one point :D )
-        if ( pointsCount > 1 )
-            edgeCollider.points = points.ToArray ( );
     }
 
     public Vector2 GetLastPoint ( ) {
