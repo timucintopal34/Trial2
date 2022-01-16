@@ -8,13 +8,11 @@ using UnityEngine;
 public class LinesDrawer : MonoBehaviour {
 
     public GameObject linePrefab;
-    public LayerMask cantDrawOverLayer;
-    int cantDrawOverLayerIndex;
 
     [Space ( 30f )]
     public Gradient lineColor;
+    
     public float linePointsMinDistance;
-    public float lineWidth;
     
     Line currentLine;
 
@@ -52,10 +50,6 @@ public class LinesDrawer : MonoBehaviour {
         // Debug.Log($"Nodes amount {nodes.Count}");
     }
 
-    void Start ( ) {
-        cantDrawOverLayerIndex = LayerMask.NameToLayer ( "CantDrawOver" );
-    }
-
     void Update ( ) {
         if ( Input.GetMouseButtonDown ( 0 ) )
             BeginDraw();
@@ -70,13 +64,18 @@ public class LinesDrawer : MonoBehaviour {
     // Begin Draw ----------------------------------------------
     void BeginDraw ( ) {
         currentLine = Instantiate ( linePrefab, this.transform ).GetComponent <Line> ( );
+        
         Time.timeScale = .5f;
-        //Set line properties
-        // currentLine.transform.localPosition = cam.ScreenToWorldPoint(Input.mousePosition);
-        currentLine.UsePhysics ( false );
-        currentLine.SetLineColor ( lineColor );
+        // currentLine.SetLineColor ( lineColor );
         currentLine.SetPointsMinDistance ( linePointsMinDistance );
-        currentLine.SetLineWidth ( lineWidth );
+        
+        RaycastHit hit;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        var layerMask = 1 << 3;
+        if (!Physics.Raycast(ray, out hit, 100, layerMask: layerMask))
+        {
+            EndDraw();
+        }
 
     }
     // Draw ----------------------------------------------------
@@ -85,16 +84,20 @@ public class LinesDrawer : MonoBehaviour {
         //Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
         // RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer );
         
-        // if ( hit )
+        // if ( !hit )
         // {
         //     Debug.Log("End Draw");
         //     EndDraw();
         // }
         // else
         // {
-        currentLine.AddPoint(mousePosition);
+        // DrawArea.Instance.GetPointOnArea(mousePosition);        
+        
+        currentLine.AddPoint(DrawArea.Instance.GetPointOnArea(mousePosition));
+        // currentLine.AddPoint(mousePosition);
         // }
     }
+    
     // End Draw ------------------------------------------------
     void EndDraw ( ) {
         Time.timeScale = 1;
@@ -137,13 +140,11 @@ public class LinesDrawer : MonoBehaviour {
             points[i] -= startPoint;
 
             nodes[i].localPosition = new Vector2(points[i].x, points[i].y );
-
         }
 
         _meshController.transform.position = new Vector3(_meshController.transform.position.x,
-            _meshController.transform.position.y + 2, 0);
+            _meshController.transform.position.y + 1, 0);
 
-        // Debug.Log($"Start new: {nodes[0].localPosition}");
         if (!rb.useGravity)
         {
             _carController.applyForce = true;
@@ -151,10 +152,6 @@ public class LinesDrawer : MonoBehaviour {
             rb.isKinematic = false;
         }
         
-        // if(!rearTire.gameObject.activeSelf)
-        //     rearTire.gameObject.SetActive(true);
-        // if(!frontTire.gameObject.activeSelf)
-        //     frontTire.gameObject.SetActive(true);
         rearTire.SetParent(_meshController.transform);
         frontTire.SetParent(_meshController.transform);
         

@@ -14,6 +14,7 @@ public class MeshController : MonoBehaviour
     public Vector3 lastSafePosition;
 
     private bool startTimer = false;
+    public float hideLimit = 3.0f;
     public float time;
     private void Start()
     {
@@ -32,7 +33,7 @@ public class MeshController : MonoBehaviour
         if (startTimer)
         {
             time += Time.deltaTime;
-            if(time >= 1.0f)
+            if(time >= hideLimit)
             {
                 startTimer = false;
                 isRaycasting = false;
@@ -64,8 +65,7 @@ public class MeshController : MonoBehaviour
                     startTimer = false;
                     ground = true;
                     box.position = hit.point;
-                    lastSafePosition = new Vector3(hit.point.x - 10 , hit.point.y + 5);
-               
+                    lastSafePosition = new Vector3(hit.point.x - 5f , hit.point.y + 2.5f);
             }
             else
             {

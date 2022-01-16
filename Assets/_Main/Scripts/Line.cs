@@ -4,8 +4,6 @@ using System.Collections.Generic;
 public class Line : MonoBehaviour {
 
     public LineRenderer lineRenderer;
-    public EdgeCollider2D edgeCollider;
-    public Rigidbody2D rigidBody;
 
     [HideInInspector] public List<Vector2> points = new List<Vector2> ( );
     [HideInInspector] public int pointsCount = 0;
@@ -36,26 +34,12 @@ public class Line : MonoBehaviour {
         return ( Vector2 )lineRenderer.GetPosition ( pointsCount - 1 );
     }
 
-    public void UsePhysics ( bool usePhysics ) {
-        // isKinematic = true  means that this rigidbody is not affected by Unity's physics engine
-        rigidBody.isKinematic = !usePhysics;
-    }
-
     public void SetLineColor ( Gradient colorGradient ) {
         lineRenderer.colorGradient = colorGradient;
     }
 
     public void SetPointsMinDistance ( float distance ) {
         pointsMinDistance = distance;
-    }
-
-    public void SetLineWidth ( float width ) {
-        lineRenderer.startWidth = width;
-        lineRenderer.endWidth = width;
-
-        circleColliderRadius = width / 2f;
-
-        edgeCollider.edgeRadius = circleColliderRadius;
     }
 
 }

@@ -9,25 +9,25 @@ public class DrawArea : Singleton<DrawArea>
     [SerializeField] private Transform leftBound;
     [SerializeField] private Transform rightBound;
     
-    public Vector2 GetPointOnArea(Vector3 position)
+    public Vector3 GetPointOnArea(Vector3 position)
     {
-        if (position.z < leftBound.position.z)
+        if (position.x < leftBound.position.x)
         {
-            position.z = leftBound.position.z;
+            position.x = leftBound.position.x;
         }
         if (position.y < lowerBound.position.y)
         {
             position.y = lowerBound.position.y;
         }
-        if (position.z > rightBound.position.z)
+        if (position.x > rightBound.position.x)
         {
-            position.z = rightBound.position.z;
+            position.x = rightBound.position.x;
         }
         if (position.y > upperBound.position.y)
         {
             position.y = upperBound.position.y;
         }
         
-        return new Vector2(position.z, position.y);
+        return position;
     }
 }
