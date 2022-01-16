@@ -3781,3 +3781,43 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 9408.055545 seconds.
+  path: Assets/_Main/Materials/Tires.mat
+  artifactKey: Guid(cc668212498444cd5b41a5a7dba420fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Main/Materials/Tires.mat using Guid(cc668212498444cd5b41a5a7dba420fd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8528d7215b76f1f0def42e57fca6564') in 0.307292 seconds 
+  Import took 0.320420 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.359591 seconds.
+  path: Assets/_Main/Prefabs/Line.prefab
+  artifactKey: Guid(d4083203850a9469d9da0f7d604a479e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Main/Prefabs/Line.prefab using Guid(d4083203850a9469d9da0f7d604a479e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1342b9fa3d5fb3eed4a33f976d684676') in 0.645364 seconds 
+  Import took 0.651384 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.217387 seconds.
+  path: Assets/_Main/2D/Sprites/DrawArea.png
+  artifactKey: Guid(d3df0a662304846938b9fe01cebe2040) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Main/2D/Sprites/DrawArea.png using Guid(d3df0a662304846938b9fe01cebe2040) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '978311531d21089f659465037737fb25') in 0.804957 seconds 
+  Import took 0.813124 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000453 seconds.
+  path: Assets/_Main/Prefabs/Misc/DrawParent.prefab
+  artifactKey: Guid(b6dea3c5aae6545cda5b47d450da7638) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Main/Prefabs/Misc/DrawParent.prefab using Guid(b6dea3c5aae6545cda5b47d450da7638) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db021fdd04074a16e166f3e4bb022e78') in 0.091961 seconds 
+  Import took 0.109592 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000145 seconds.
+  path: Assets/_Main/2D/Sprites/DrawArea.prefab
+  artifactKey: Guid(147ef66fece144e64a4564b743b58559) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Main/2D/Sprites/DrawArea.prefab using Guid(147ef66fece144e64a4564b743b58559) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd763c3bf1790bbe0e6542d216c3e5a0a') in 0.019410 seconds 
+  Import took 0.036272 seconds .
+
