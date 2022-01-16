@@ -8,11 +8,6 @@ public class BrushMovement : Singleton<BrushMovement>
     [SerializeField] private LayerMask brushBoardMask;
     [SerializeField] private Camera brushCamera;
     [SerializeField] private DrawArea drawArea;
-    
-    // void Update()
-    // {
-    //     brushTransform.position = Position();
-    // }
 
     public Vector3 Position()
     {

@@ -5,8 +5,11 @@ using DG.Tweening;
 using SplineMesh;
 using UnityEngine;
 
-public class LinesDrawer : MonoBehaviour {
-
+public class LinesDrawer : MonoBehaviour
+{
+    private bool isGameStarted = false;
+    private bool isGameEnded = false;
+    
     public GameObject linePrefab;
 
     [Space ( 30f )]
@@ -26,8 +29,6 @@ public class LinesDrawer : MonoBehaviour {
     private MeshController _meshController;
     private Rigidbody rb;
 
-    private CarController _carController;
-
     public Transform rearTire;
     public Transform frontTire;
 
@@ -36,69 +37,71 @@ public class LinesDrawer : MonoBehaviour {
         _ropeBuilder = FindObjectOfType<RopeBuilder>();
         _meshController = FindObjectOfType<MeshController>();
         rb = _meshController.GetComponent<Rigidbody>();
-        _carController = FindObjectOfType<CarController>();
     }
-    
+
+    private void Start()
+    {
+        UIManager.Instance.OnLevelStart += () =>
+        {
+            isGameStarted = true;
+        };
+
+        UIManager.Instance.OnLevelEnd += () =>
+        {
+            isGameEnded = true;
+        };
+    }
+
+    //Get the list of the rope so we can move the 
     private void Initialize()
     {
         nodes.Clear();
         var parent = FindObjectOfType<Spline>().transform.GetChild(1);
+        
         foreach (Transform child in parent)
-        {
             nodes.Add(child);
-        }
-        // Debug.Log($"Nodes amount {nodes.Count}");
     }
 
     void Update ( ) {
-        if ( Input.GetMouseButtonDown ( 0 ) )
-            BeginDraw();
+        if(isGameStarted && !isGameEnded)
+        {
+            if (Input.GetMouseButtonDown(0))
+                BeginDraw();
 
-        if ( currentLine != null )
-            Draw ( );
+            if (currentLine != null)
+                Draw();
 
-        if ( Input.GetMouseButtonUp ( 0 ) )
-            EndDraw ( );
+            if (Input.GetMouseButtonUp(0))
+                EndDraw();
+        }
     }
 
-    // Begin Draw ----------------------------------------------
     void BeginDraw ( ) {
+        
         currentLine = Instantiate ( linePrefab, this.transform ).GetComponent <Line> ( );
         
+        //Give Slowmotion while drawin on action as your game has
         Time.timeScale = .5f;
-        // currentLine.SetLineColor ( lineColor );
+        
         currentLine.SetPointsMinDistance ( linePointsMinDistance );
         
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        
         var layerMask = 1 << 3;
+        //If our first click didn't touch the draw plane then we end drawing
         if (!Physics.Raycast(ray, out hit, 100, layerMask: layerMask))
-        {
             EndDraw();
-        }
 
     }
-    // Draw ----------------------------------------------------
+    
     void Draw ( ) {
         Vector2 mousePosition = cam.ScreenToWorldPoint ( Input.mousePosition );
-        //Check if mousePos hits any collider with layer "CantDrawOver", if true cut the line by calling EndDraw( )
-        // RaycastHit2D hit = Physics2D.CircleCast ( mousePosition, lineWidth / 3f, Vector2.zero, 1f, cantDrawOverLayer );
         
-        // if ( !hit )
-        // {
-        //     Debug.Log("End Draw");
-        //     EndDraw();
-        // }
-        // else
-        // {
-        // DrawArea.Instance.GetPointOnArea(mousePosition);        
-        
+        //We get the each point and keep it in the boundary of the draw plane
         currentLine.AddPoint(DrawArea.Instance.GetPointOnArea(mousePosition));
-        // currentLine.AddPoint(mousePosition);
-        // }
     }
     
-    // End Draw ------------------------------------------------
     void EndDraw ( ) {
         Time.timeScale = 1;
         if ( currentLine != null ) {
@@ -106,33 +109,32 @@ public class LinesDrawer : MonoBehaviour {
                 //If line has one point
                 Destroy ( currentLine.gameObject );
             } else {
-
+                //We create the car end erase the line renderer
                 StartCoroutine(Spawn3DMesh());
                 Destroy(currentLine.gameObject);
                 currentLine = null;
             }
         }
-        
-        
     }
     
     IEnumerator Spawn3DMesh()
     {
-        
         _meshController.MeshOff();
         rearTire.SetParent(null);
         frontTire.SetParent(null);
+        
         points = currentLine.points;
         
         _meshController.transform.localEulerAngles = Vector3.zero;
-        // yield return new WaitForEndOfFrame();
+        
+        //We let rope builder to build the amount of points in line renderer
         _ropeBuilder.ChangeSegmentCount(points.Count);
         var startPoint = points[0];
         yield return new WaitForSeconds(.01f);
-        // yield return new WaitForEndOfFrame();
+        
         Initialize();
-        // Debug.Log($"Point Count : {points.Count}");
-        // Debug.Log($"Start : {startPoint}");
+        
+        //On Colliders on Car 
         _meshController.ColliderOn();
         
         for (int i = 0; i < points.Count; i++)
@@ -147,7 +149,6 @@ public class LinesDrawer : MonoBehaviour {
 
         if (!rb.useGravity)
         {
-            _carController.applyForce = true;
             rb.useGravity = true;
             rb.isKinematic = false;
         }
@@ -155,11 +156,13 @@ public class LinesDrawer : MonoBehaviour {
         rearTire.SetParent(_meshController.transform);
         frontTire.SetParent(_meshController.transform);
         
+        //To position the tires right place on car meshes - which is the start of our line renderer and end of it
         rearTire.localPosition = nodes[0].localPosition;
         frontTire.localPosition = nodes[nodes.Count - 1].localPosition;
         
         yield return new WaitForSeconds(.01f);
         
+        //To view the mesh of the car build
         _meshController.MeshOn();
         
 

@@ -9,6 +9,8 @@ public class DrawArea : Singleton<DrawArea>
     [SerializeField] private Transform leftBound;
     [SerializeField] private Transform rightBound;
     
+    
+    //We actually clamp/limit the position which exceed to the bounds
     public Vector3 GetPointOnArea(Vector3 position)
     {
         if (position.x < leftBound.position.x)

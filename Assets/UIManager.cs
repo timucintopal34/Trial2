@@ -36,6 +36,7 @@ public class UIManager : Singleton<UIManager>
         {
             isGameEnded = true;
             OnLevelEnd?.Invoke();
+            SuccessUI.DOScale(Vector3.one, .5f).SetEase(Ease.OutBack);
         }
     }
 }
