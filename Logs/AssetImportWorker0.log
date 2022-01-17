@@ -3821,3 +3821,91 @@ Received Import Request.
 Start importing Assets/_Main/2D/Sprites/DrawArea.prefab using Guid(147ef66fece144e64a4564b743b58559) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd763c3bf1790bbe0e6542d216c3e5a0a') in 0.019410 seconds 
   Import took 0.036272 seconds .
 
+========================================================================
+Received Import Request.
+  Time since last request: 477.087808 seconds.
+  path: Assets/_Main/Models
+  artifactKey: Guid(b89d32fbaca5e43f8be4a7eee05debe9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Main/Models using Guid(b89d32fbaca5e43f8be4a7eee05debe9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '81730188d0290c0e1d930e56265e6ff3') in 0.055382 seconds 
+  Import took 0.067961 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 6.576090 seconds.
+  path: Assets/_Main/Models/Tire-1.fbx
+  artifactKey: Guid(4505b92e11d0649f4bec6ee713dab088) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Main/Models/Tire-1.fbx using Guid(4505b92e11d0649f4bec6ee713dab088) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8b7070c5424231c628439c09796fcf57') in 0.762351 seconds 
+  Import took 0.768837 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000386 seconds.
+  path: Assets/_Main/Models/Tire-2.fbx
+  artifactKey: Guid(2b2091444457849eb9baad03038782b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Main/Models/Tire-2.fbx using Guid(2b2091444457849eb9baad03038782b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33d63c44ef09676ab5bb3a5f216d7b8e') in 0.097782 seconds 
+  Import took 0.122299 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 117.473818 seconds.
+  path: Assets/_Main/Models/Tire-2.fbx
+  artifactKey: Guid(2b2091444457849eb9baad03038782b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/_Main/Models/Tire-2.fbx using Guid(2b2091444457849eb9baad03038782b4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b023f3ed26ecbf3ef8af894a45249c76') in 0.073454 seconds 
+  Import took 0.085499 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.007498 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for OSXStandalone target not found
+Refreshing native plugins compatible for Editor in 0.38 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.621 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2628ms)
+		BeginReloadAssembly (277ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (34ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (115ms)
+		EndReloadAssembly (2245ms)
+			LoadAssemblies (215ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (348ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (53ms)
+			SetupLoadedEditorAssemblies (1353ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (14ms)
+				SetLoadedEditorAssemblies (2ms)
+				RefreshPlugins (0ms)
+				BeforeProcessingInitializeOnLoad (234ms)
+				ProcessInitializeOnLoadAttributes (1087ms)
+				ProcessInitializeOnLoadMethodAttributes (14ms)
+				AfterProcessingInitializeOnLoad (1ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (37ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.38 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 1594 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 186.2 MB.
+System memory in use after: 186.3 MB.
+
+Unloading 20 unused Assets to reduce memory usage. Loaded Objects now: 2237.
+Total: 2.332250 ms (FindLiveObjects: 0.147667 ms CreateObjectMapping: 0.033750 ms MarkObjects: 2.121709 ms  DeleteObjects: 0.027125 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:framework-osx-AVFoundation: e770b220cccbd017edd2c1fefb359320 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
