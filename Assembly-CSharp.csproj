@@ -63,6 +63,7 @@
      <Compile Include="Assets\SplineMesh\Scripts\Bezier\SplineNode.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Bezier\Spline.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\MeshProcessing\MeshBender.cs" />
+     <Compile Include="Assets\FinishLane.cs" />
      <Compile Include="Assets\MeshGenerator.cs" />
      <Compile Include="Assets\RopeController.cs" />
      <Compile Include="Assets\_Main\Scripts\GamePlay\DrawSystem\DrawArea.cs" />
@@ -85,7 +86,6 @@
      <Compile Include="Assets\_Main\Scripts\GamePlay\DrawSystem\BrushMovement.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\Bezier\SplineSmoother.cs" />
      <Compile Include="Assets\SplineMesh\Scripts\MeshProcessing\ExtrusionSegment.cs" />
-     <Compile Include="Assets\FinishLane.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

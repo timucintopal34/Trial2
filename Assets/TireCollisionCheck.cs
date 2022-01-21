@@ -25,6 +25,7 @@ public class TireCollisionCheck : MonoBehaviour
     {
         if (other.gameObject.layer == 7 && !isGameEnded)
         {
+            Debug.Log("Force!");
             isTriggered = true;
             _rigidbody.AddForce(Vector3.right * forceAmount , ForceMode.Force);
         }
