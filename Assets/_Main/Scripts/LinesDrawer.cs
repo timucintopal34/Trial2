@@ -117,8 +117,13 @@ public class LinesDrawer : MonoBehaviour
                 StartCoroutine(Spawn3DMesh());
                 Destroy(currentLine.gameObject);
                 currentLine = null;
+                if(!rearTire.gameObject.activeSelf)
+                    rearTire.gameObject.SetActive(true);
+                if(!frontTire.gameObject.activeSelf)
+                    frontTire.gameObject.SetActive(true);
             }
         }
+        
     }
     
     IEnumerator Spawn3DMesh()
