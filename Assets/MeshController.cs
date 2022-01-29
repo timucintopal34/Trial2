@@ -29,6 +29,12 @@ public class MeshController : MonoBehaviour
         };
     }
 
+    private void LateUpdate()
+    {
+        // transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 0, transform.localEulerAngles.z);
+
+    }
+
     private void Update()
     {
         //
@@ -68,7 +74,7 @@ public class MeshController : MonoBehaviour
                     startTimer = false;
                     ground = true;
                     //To see where is the way point
-                    lastSafePosition = new Vector3(hit.point.x - 15f , hit.point.y + 2.5f);
+                    lastSafePosition = new Vector3(hit.point.x - 20f , hit.point.y +4f);
             }
             else //If we dont hit ground then we start to count the time
             {

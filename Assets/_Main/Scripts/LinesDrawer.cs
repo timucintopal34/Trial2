@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class LinesDrawer : MonoBehaviour
 {
+    public float timeScale = 2;
+    public float slowMotionTimeScale = .4f;
+    
     private bool isGameStarted = false;
     private bool isGameEnded = false;
     
@@ -41,6 +44,7 @@ public class LinesDrawer : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = timeScale;
         UIManager.Instance.OnLevelStart += () =>
         {
             isGameStarted = true;
@@ -81,7 +85,7 @@ public class LinesDrawer : MonoBehaviour
         currentLine = Instantiate ( linePrefab, this.transform ).GetComponent <Line> ( );
         
         //Give Slowmotion while drawin on action as your game has
-        Time.timeScale = .25f;
+        Time.timeScale = slowMotionTimeScale;
         
         currentLine.SetPointsMinDistance ( linePointsMinDistance );
         
@@ -103,7 +107,7 @@ public class LinesDrawer : MonoBehaviour
     }
     
     void EndDraw ( ) {
-        Time.timeScale = 1;
+        Time.timeScale = timeScale;
         if ( currentLine != null ) {
             if ( currentLine.pointsCount < 2 ) {
                 //If line has one point

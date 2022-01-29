@@ -36,21 +36,55 @@ public class TireController : Singleton<TireController>
         UIManager.Instance.OnLevelEnd += () =>
         {
             isGameEnded = true;
+            
         };
         
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         AnimateWheels();
+
+        // if (front.transform.position.x < rear.transform.position.x)
+        // {
+        //     Debug.Log($"Swap {front.transform.position.x} - {rear.transform.position.x}");
+        //     var tempFront = front.transform.localPosition;
+        //     var tempRear = rear.transform.localPosition;
+        //     front.transform.localPosition = tempRear;
+        //     rear.transform.localPosition = tempFront;
+        // }
     }
 
     void FixedUpdate()
     {
+        if (front.isGrounded && rear.isGrounded && !isGameEnded)
+        {
+            front.motorTorque = wheelPower/2 *  multiplier * Time.deltaTime;
+            rear.motorTorque = wheelPower * multiplier * Time.deltaTime;
+        }
+        ////////
+        // if (front.isGrounded)
+        // {
+        //     Debug.Log("Front Grounded");
+        //     front.motorTorque = wheelPower *  multiplier * Time.deltaTime;
+        //     frontIsGrounded = true;
+        // }
+        // else
+        //     frontIsGrounded = false;
+        //
+        // if (rear.isGrounded)
+        // {
+        //     Debug.Log("Rear Grounded");
+        //     rear.motorTorque = wheelPower * multiplier * Time.deltaTime;
+        // }
+        // else
+        //     rearIsGrounded = false;
+        
         if(_rigidbody.velocity.magnitude > maxSpeed)
         {
             _rigidbody.velocity = _rigidbody.velocity.normalized * maxSpeed;
         }
+        
     }
 
     private void AnimateWheels()
@@ -58,21 +92,23 @@ public class TireController : Singleton<TireController>
         Quaternion _rot;
         Vector3 _pos;
         
-        if(front.isGrounded)
-        {
+        // if(front.isGrounded)
+        // {
             front.GetWorldPose(out _pos, out _rot);
             frontModel.transform.position = _pos;
-            frontModel.transform.rotation = _rot;
-        }
+            if(front.isGrounded )
+                frontModel.transform.rotation = _rot;
+        // }
 
-        if (rear.isGrounded)
-        {
+        // if (rear.isGrounded)
+        // {
             rear.GetWorldPose(out _pos,out _rot);
             rearModel.transform.position = _pos;
-            rearModel.transform.rotation = _rot;
-        }
+            if (rear.isGrounded )
+                rearModel.transform.rotation = _rot;
+        // }
 
-        if (rear.isGrounded || front.isGrounded)
+        if ((rear.isGrounded || front.isGrounded) && !isGameEnded)
         {
             velocity = _rigidbody.velocity;
             angularVelocity = _rigidbody.angularVelocity;
@@ -81,29 +117,14 @@ public class TireController : Singleton<TireController>
 
     public void ReUseSpeed()
     {
-        _rigidbody.velocity = velocity;
-        _rigidbody.angularVelocity = angularVelocity;
+        _rigidbody.velocity = velocity/2;
+        // _rigidbody.angularVelocity = angularVelocity;
     }
 
-    private void LateUpdate()
-    {
-        if (front.isGrounded)
-        {
-            Debug.Log("Front Grounded");
-            front.motorTorque = wheelPower *  multiplier;
-            frontIsGrounded = true;
-        }
-        else
-            frontIsGrounded = false;
-
-        if (rear.isGrounded)
-        {
-            Debug.Log("Rear Grounded");
-            rear.motorTorque = wheelPower * multiplier;
-        }
-        else
-            rearIsGrounded = false;
-    }
+    // private void ()
+    // {
+    //     
+    // }
 
     private void OnTriggerStay(Collider other)
     {
