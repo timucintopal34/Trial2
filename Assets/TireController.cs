@@ -59,7 +59,7 @@ public class TireController : Singleton<TireController>
     {
         if (front.isGrounded && rear.isGrounded && !isGameEnded)
         {
-            front.motorTorque = wheelPower/2 *  multiplier * Time.deltaTime;
+            front.motorTorque = wheelPower *  multiplier * Time.deltaTime;
             rear.motorTorque = wheelPower * multiplier * Time.deltaTime;
         }
         ////////
