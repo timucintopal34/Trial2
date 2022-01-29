@@ -15,12 +15,12 @@ public class CarController : MonoBehaviour
     [SerializeField] private float xVelocity;
     [SerializeField] private float speed;
 
-    private List<TireCollisionCheck> tires = new List<TireCollisionCheck>();
+    private List<TireController> tires = new List<TireController>();
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
-        tires = FindObjectsOfType<TireCollisionCheck>().ToList();
+        tires = FindObjectsOfType<TireController>().ToList();
     }
 
     private void Start()

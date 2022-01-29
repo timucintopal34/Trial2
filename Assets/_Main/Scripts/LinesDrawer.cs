@@ -81,7 +81,7 @@ public class LinesDrawer : MonoBehaviour
         currentLine = Instantiate ( linePrefab, this.transform ).GetComponent <Line> ( );
         
         //Give Slowmotion while drawin on action as your game has
-        Time.timeScale = .5f;
+        Time.timeScale = .25f;
         
         currentLine.SetPointsMinDistance ( linePointsMinDistance );
         
@@ -141,11 +141,11 @@ public class LinesDrawer : MonoBehaviour
         {
             points[i] -= startPoint;
 
-            nodes[i].localPosition = new Vector2(points[i].x, points[i].y );
+            nodes[i].localPosition = new Vector3(0, points[i].y ,points[i].x);
         }
 
         _meshController.transform.position = new Vector3(_meshController.transform.position.x,
-            _meshController.transform.position.y + 1, 0);
+            _meshController.transform.position.y + 3, 0);
 
         if (!rb.useGravity)
         {
@@ -164,6 +164,7 @@ public class LinesDrawer : MonoBehaviour
         
         //To view the mesh of the car build
         _meshController.MeshOn();
+        TireController.Instance.ReUseSpeed();
         
 
 
